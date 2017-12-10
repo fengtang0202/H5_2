@@ -1,25 +1,25 @@
 $(document).on("touchmove",function(e){
     e.preventDefault();
 }, false);
-//点击圆点显示dialog
+// 点击圆点显示dialog
 // click =>touchstart
-// $(".point").on("touchstart",function(){
-//   var index=$(this).attr("class").slice(-1)
-//   $(".dialog_under").show()
-//   $(`.tag${index}`).addClass("show")
-//   console.log($(`.tag${index}`))
-// })
-// $(".dialog_under").on("touchstart",function(){
-//     $(".dialog").removeClass("show");
-//     $(this).hide();
-// });
-//  $(".btn_img").click(function(){
-//    let page=$(this).parent()
-//    page.css("left",0)
-//    page.css("-webkit-animation", "slidetoleft .4s forwards ease-out");
-//      $(".photo").css({"animation":1,"left":0,"opacity":1,"visibility":"visible"})
-//      $(".photo").attr("touchable",true)
-//  })
+$(".point").on("touchstart",function(){
+  var index=$(this).attr("class").slice(-1)
+  $(".dialog_under").show()
+  $(`.tag${index}`).addClass("show")
+  console.log($(`.tag${index}`))
+})
+$(".dialog_under").on("touchstart",function(){
+    $(".dialog").removeClass("show");
+    $(this).hide();
+});
+ $(".btn_img").click(function(){
+   let page=$(this).parent()
+   page.css("left",0)
+   page.css("-webkit-animation", "slidetoleft .4s forwards ease-out");
+     $(".photo").css({"animation":1,"left":0,"opacity":1,"visibility":"visible"})
+     $(".photo").attr("touchable",true)
+ })
 registerSlide(null, null, $(".firstpage"), $(".secondpage"), function(){setInterval(function(){$(".in_0").attr("src","./images/IN_1.png")},1000)});
 registerSlide(null, $(".firstpage"), $(".secondpage"), $(".thirdpage"),function(){setInterval(function(){$(".in_1").attr("src","./images/IN_light.png")},1000)});
 registerSlide(null, $(".secondpage"), $(".thirdpage"), $(".forthpage"),null);

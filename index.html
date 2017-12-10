@@ -13,10 +13,16 @@
         @keyframes transy { 0% { transform:translateY(0%); }  50% { transform:translateY(-40%); }  100% { transform:translateY(0%); } }
         @-webkit-keyframes transy { 0% { -webkit-transform:translateY(0%); }  50% { -webkit-transform:translateY(-40%); }  100% { -webkit-transform:translateY(0%); } }
         /*//////////*/
+        @keyframes fadein { 0% {opacity:0;} 100% {opacity:1;} }
+        @-webkit-keyframes fadein { 0% {opacity:0;} 100% {opacity:1;} }
         @keyframes slidetoleft { 100% { left:-100%; opacity:0; } }
         @-webkit-keyframes slidetoleft { 100% { left:-100%; opacity:0; } }
         @keyframes slidetoorigin1 { 100% { left:0; opacity:1; } }
-        @-webkit-keyframes slidetoorigin1 { 100% { left:0; opacity:1; } }
+        @-webkit-keyframes slidetoorigin1 { 100% { left:0; opacity:1; }}
+        @keyframes pulse{0% { -webkit-transform: scale3d(1,1,1); transform: scale3d(1,1,1); }
+          50% { -webkit-transform: scale3d(1.3,1.3,1.3); transform: scale3d(1.3,1.3,1.3); }
+          100% { -webkit-transform: scale3d(1,1,1); transform: scale3d(1,1,1); }
+      }
         /*//////////*/
         body { transition: all 1s linear;font-size:62.5%;margin:0; padding:0;overflow:hidden; font-family:"Microsoft YaHei";color:#fff; -webkit-user-drag:none; -webkit-tap-highlight-color:rgba(0, 0, 0, 0); }
         p{margin:0;}
@@ -24,13 +30,13 @@
         .firstpage{  background:url("./images/1.jpg") no-repeat;background-size:100% 100%;z-index:13; }
         .secondpage{ background:url("./images/2.jpg") no-repeat;background-size:100% 100%;z-index:12; }
         .thirdpage { background:url("./images/3.jpg") no-repeat;background-size:100% 100%;z-index:11; }
-        .forthpage { background:url("./images/4.jpg") no-repeat;background-size:100% 100%;z-index:10; }
+        .forthpage { background:url("./images/4.jpg") no-repeat;background-size:100% 100%;z-index:14; }
         .fivepgae { background:url("./images/5.jpg") no-repeat;background-size:100% 100%;z-index:9; }
         .sixpage { background:url("./images/6.jpg") no-repeat;background-size:100% 100%;z-index:8; }
         .sevenpage{background:url("./images/7.jpg") no-repeat;background-size:100% 100%;z-index:7;}
         .eightpage{background:url("./images/8.jpg") no-repeat;background-size:100% 100%;z-index:6;}
-        /*.page_1{position: absolute;width:100%;height:100%;z-index:100;}*/
-        /*.page_2{position: absolute;width:100%;height:100%;z-index:99;}*/
+        .page1{position:absolute;left:0;top:0;width:100%;height:100%;z-index:100;background-color:#fff;}
+        .page2{position: absolute;left:0;top:0;width:100%;height:100%;z-index:99;background-color:#000;}
           /*/////////////*/
         .arrow1:before {content: "";display: block;width: 20px;height: 20px;margin-left: 3px;margin-top: 4px;border: #250332 1px solid;transform: rotate(45deg);-webkit-transform: rotate(45deg);}
         /*底部的2个箭头*/
@@ -41,7 +47,7 @@
         .slide>.arrow2 { width:28px; height:14px; margin:0 auto 2px; overflow:hidden; animation:transy 1s infinite ease-in-out; -webkit-animation:transy 1s infinite ease-in-out; }
         .slide>.arrow2:before {content:""; display: block; width:20px; height:20px; margin-left:3px; margin-top:4px; border:#fff 1px solid; transform:rotate(45deg); -webkit-transform:rotate(45deg); }
         .dialog_wrap {display:flex; align-items:center; justify-content:center; position:absolute; top:0; left:0; width:100%; height:100%; perspective:1300px; -webkit-perspective:1300px; pointer-events:none; }
-        .dialog_wrap>.dialog_under { position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:auto; display:none; }
+        .dialog_wrap>.dialog_under { position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:auto;}
         .dialog_wrap>.dialog { position:absolute; -webkit-transform-style:preserve-3d; transform-style:preserve-3d; pointer-events:auto; }
         /*dialog的动画css*/
         .dialog_wrap>.dialog.tag { left:50%; top:50%;
@@ -51,6 +57,26 @@
         .left_arrow{transition: all .5s linear;position: absolute;left:5%;font-size: 80px;top:50%;color:rgba(255,255,255,.8)}
         .right_arrow{transition: all .5s linear;position: absolute;right:5%;font-size: 80px;top:50%;color:rgba(255,255,255,.8)}
          .in{position: absolute;top:7.5%;}
+          .point { position:absolute; width:34px; height:34px; padding:20px; }
+          .point_1{left:46%;top:23%;}
+          .point_2{left:22%;top:25%;}
+          .point_3{left:48%;top:40%;}
+          .point_4{left:45%;top:60%;}
+          .point_5{left:29%;top:38%;}
+          .point_6{left:67%;top:39%;}
+          .point_7{left:64%;top:57%;}
+          .point:before { content:""; display:block; width:34px; height:34px; border-radius:17px; background:rgba(245,59,124, .4);
+            animation:2s pulse infinite; -webkit-animation:2s pulse infinite; }
+          .point:after { content:""; position:absolute; top:27px; left:27px; width:20px; height:20px; border-radius:10px; background:rgba(245,59,124, 1); }
+          .dialog_wrap { display:flex; align-items:center; justify-content:center; position:absolute; top:0; left:0; width:100%; height:100%; perspective:1300px; -webkit-perspective:1300px; pointer-events:none; }
+          .dialog_wrap>.dialog_under { position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:auto; display:none; }
+          .dialog_wrap>.dialog { position:absolute; -webkit-transform-style:preserve-3d; transform-style:preserve-3d; pointer-events:auto; }
+          .dialog_wrap>.dialog.tag { left:50%; top:50%;
+             -webkit-transform:translateZ(100px) translateX(60%) translateY(-50%) rotateY(-90deg); transform:translateZ(100px) translateX(60%) translateY(-50%) rotateY(-90deg);
+             -webkit-transform-origin:0 100%;  transform-origin:0 100%; opacity:0; -webkit-transition:all 0.4s ease-in-out; transition:all 0.4s ease-in-out; }
+          .dialog_wrap>.dialog.tag.show {
+             -webkit-transform:translateZ(0) translateX(-50%) translateY(-50%) rotateY(0deg); transform:translateZ(0) translateX(-50%) translateY(-50%) rotateY(0deg); opacity:1;
+         }
      </style>
 </head>
 <body>
@@ -72,13 +98,46 @@
         </div>
       </section>
       <section class="page forthpage">
-        <div style="width:100%;height:100%;overflow:hidden;">
-        <div class='page_1'>
+        <div class='page1'>
           <img src="./images/bike_2.png" alt="">
+                <div class="point point_1"></div>
+                <div class="point point_2"></div>
+                <div class="point point_3"></div>
+                <div class="point point_4"></div>
+         <div class="dialog_wrap">
+            <div class="dialog tag tag1">
+                <img class="bg" src="images/4_1.png">
+            </div>
+            <div class="dialog tag tag2">
+                <img class="bg" src="images/4_2.png">
+            </div>
+            <div class="dialog tag tag3">
+                <img class="bg" src="images/4_3.png">
+            </div>
+            <div class="dialog tag tag4">
+                <img class="bg" src="images/4_4.png">
+            </div>
+            <div class="dialog_under"></div>
         </div>
-        <div class='page_2'>
+        </div>
+        <div class='page2'>
           <img src="./images/bike_3.png" alt="">
-        </div>
+          <div class="point point_5"></div>
+          <div class="point point_6"></div>
+          <div class="point point_7"></div>
+          <div class="dialog_wrap">
+             <div class="dialog tag tag5">
+                 <img class="bg" src="images/4_5.png">
+             </div>
+             <div class="dialog tag tag6">
+                 <img class="bg" src="images/4_6.png">
+             </div>
+             <div class="dialog tag tag7">
+                 <img class="bg" src="images/4_7.png">
+             </div>
+             <div class="dialog_under"></div>
+         </div>
+         </div>
         </div>
         <div class="bottom">
             <div class="slide"><div class="arrow1"></div><div class="arrow2"></div></div>
