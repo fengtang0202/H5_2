@@ -24,7 +24,7 @@ registerSlide(null, null, $(".firstpage"), $(".secondpage"), function(){setTimeo
 registerSlide(null, $(".firstpage"), $(".secondpage"), $(".thirdpage"),function(){setTimeout(function(){$(".in_1").attr("src","./images/IN_light.png")},500)});
 registerSlide(null, $(".secondpage"), $(".thirdpage"), $(".forthpage"),null);
 registerSlide(null, $(".thirdpage"), $(".forthpage"), $(".fivepgae"),function(){$(".page_5").css({"transition":"all 1s linear","left":"5%"})});
-registerSlide(null,$(".forthpage"),$(".fivepgae"),$(".sixpage"),null)
+registerSlide(null,$(".forthpage"),$(".fivepgae"),$(".sixpage"),function(){$(".page_6").css({"transition":"all 1s linear","left":"5%"})});
 registerSlide(null,$(".fivepgae"),$(".sixpage"),$(".sevenpage"),function(){setTimeout(function(){$(".bike_img").attr("src","./images/bike_5.jpg")},500)});
 registerSlide(null,$(".sixpage"),$(".sevenpage"),$(".eightpage"),null)
 registerSlide(null,$(".sevenpage"),$(".eightpage"),null,null)
