@@ -20,12 +20,12 @@ $(".dialog_under").on("touchstart",function(){
      $(".photo").css({"animation":1,"left":0,"opacity":1,"visibility":"visible"})
      $(".photo").attr("touchable",true)
  })
-registerSlide(null, null, $(".firstpage"), $(".secondpage"), function(){setInterval(function(){$(".in_0").attr("src","./images/IN_1.png")},1000)});
-registerSlide(null, $(".firstpage"), $(".secondpage"), $(".thirdpage"),function(){setInterval(function(){$(".in_1").attr("src","./images/IN_light.png")},1000)});
+registerSlide(null, null, $(".firstpage"), $(".secondpage"), function(){setTimeout(function(){$(".in_0").attr("src","./images/IN_1.png")},500)});
+registerSlide(null, $(".firstpage"), $(".secondpage"), $(".thirdpage"),function(){setTimeout(function(){$(".in_1").attr("src","./images/IN_light.png")},500)});
 registerSlide(null, $(".secondpage"), $(".thirdpage"), $(".forthpage"),null);
-registerSlide(null, $(".thirdpage"), $(".forthpage"), $(".fivepgae"), null);
+registerSlide(null, $(".thirdpage"), $(".forthpage"), $(".fivepgae"),function(){$(".page_5").css({"transition":"all 1s linear","left":"5%"})});
 registerSlide(null,$(".forthpage"),$(".fivepgae"),$(".sixpage"),null)
-registerSlide(null,$(".fivepgae"),$(".sixpage"),$(".sevenpage"),null)
+registerSlide(null,$(".fivepgae"),$(".sixpage"),$(".sevenpage"),function(){setTimeout(function(){$(".bike_img").attr("src","./images/bike_5.jpg")},500)});
 registerSlide(null,$(".sixpage"),$(".sevenpage"),$(".eightpage"),null)
 registerSlide(null,$(".sevenpage"),$(".eightpage"),null,null)
 registerHSlide(null,$(".page_2"),$(".page1"),$(".page2"),null)
@@ -140,7 +140,6 @@ function registerSlide(page0Do, page0, page1, page2, page2Do) {
 function registerHSlide(page0Do, page0, page1, page2, page2Do) {
     //左滑事件
     var start_x;
-    console.log(1)
     page1.on("touchstart", function (e) {
         if (page1.attr("touchable") == "false") {
             start_x = Infinity;
