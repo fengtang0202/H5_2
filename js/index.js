@@ -3,13 +3,12 @@ $(document).on("touchmove",function(e){
 }, false);
 // 点击圆点显示dialog
 // click =>touchstart
-$(".point").on("touchstart",function(){
+$(".point").on("click",function(){
   var index=$(this).attr("class").slice(-1)
   $(".dialog_under").show()
   $(`.tag${index}`).addClass("show")
-  console.log($(`.tag${index}`))
 })
-$(".dialog_under").on("touchstart",function(){
+$(".dialog_under").on("click",function(){
     $(".dialog").removeClass("show");
     $(this).hide();
 });
@@ -20,7 +19,10 @@ $(".dialog_under").on("touchstart",function(){
      $(".photo").css({"animation":1,"left":0,"opacity":1,"visibility":"visible"})
      $(".photo").attr("touchable",true)
  })
-registerSlide(null, null, $(".firstpage"), $(".secondpage"), function(){setTimeout(function(){$(".in_0").attr("src","./images/IN_1.png")},500)});
+registerSlide(null, null, $(".firstpage"), $(".secondpage"), function(){setTimeout(function(){
+  $(".in_0").attr("src","./images/IN_1.png")
+  $(".bike").attr("src","./images/bike_light.png")},500)
+});
 registerSlide(null, $(".firstpage"), $(".secondpage"), $(".thirdpage"),function(){setTimeout(function(){$(".in_1").attr("src","./images/IN_light.png")},500)});
 registerSlide(null, $(".secondpage"), $(".thirdpage"), $(".forthpage"),null);
 registerSlide(null, $(".thirdpage"), $(".forthpage"), $(".fivepgae"),function(){$(".page_5").css({"transition":"all 1s linear","left":"5%"})});
@@ -28,8 +30,6 @@ registerSlide(null,$(".forthpage"),$(".fivepgae"),$(".sixpage"),function(){$(".p
 registerSlide(null,$(".fivepgae"),$(".sixpage"),$(".sevenpage"),function(){setTimeout(function(){$(".bike_img").attr("src","./images/bike_5.jpg")},500)});
 registerSlide(null,$(".sixpage"),$(".sevenpage"),$(".eightpage"),null)
 registerSlide(null,$(".sevenpage"),$(".eightpage"),null,null)
-registerHSlide(null,$(".page_2"),$(".page1"),$(".page2"),null)
-registerHSlide(null,$(".page_1"),$(".page2"),$(".page1"),null)
 function registerSlide(page0Do, page0, page1, page2, page2Do) {
     //上滑事件
     var start_y;
@@ -137,113 +137,58 @@ function registerSlide(page0Do, page0, page1, page2, page2Do) {
         }
     });
 }
-function registerHSlide(page0Do, page0, page1, page2, page2Do) {
-    //左滑事件
-    var start_x;
-    page1.on("touchstart", function (e) {
-        if (page1.attr("touchable") == "false") {
-            start_x = Infinity;
-            return;
+
+
+// secondPage left
+//获取页面startX和startY的值
+var touchstartX, touchstartY,currentParam;
+$(".content").on("touchstart", function(e) {
+    touchstartX = e.originalEvent.targetTouches[0].pageX;
+    touchstartY = e.originalEvent.targetTouches[0].pageY;
+    console.log(1)
+});
+$(".content").on("touchend", function(e) {
+    var deltaX = e.originalEvent.changedTouches[0].pageX - touchstartX;
+    var deltaY = e.originalEvent.changedTouches[0].pageY - touchstartY;
+    if (Math.abs(deltaX) > 50 && Math.abs(deltaX) >  Math.abs(deltaY)) {
+        if (deltaX > 0) {
+            currentParam>1 && showParam(currentParam-1);
+            console.log("left:"+currentParam)
+            $(".param:not(.show_1)").css("display","none")
+              console.log("向右")
+        }else{
+            currentParam<3 && showParam(currentParam+1);
+            $(".param:not(.show_1)").css("display","none")
+            console.log("left:"+currentParam)
+            console.log("向左")
         }
-        start_x = e.originalEvent.targetTouches[0].pageX;
-        var page1_index = parseInt(page1.css("z-index"));
-        if (page1_index <= 0) {
-            page1_index = 999;
-            page1.css("z-index", page1_index);
-        }
-        if (page0 != null) {
-            page0.attr("touchable", "false");
-            page0.css("animation", "1");
-            page0.css("-webkit-animation", "1");
-            page0.css("left", "-100%");
-            page0.css("opacity", "0");
-            page0.css("z-index", page1_index + 1);
-            page0.css("visibility", "visible");
-            page0.show();
-        }
-        if (page2 != null) {
-            page2.attr("touchable", "false");
-            page2.css("animation", "1");
-            page2.css("-webkit-animation", "1");
-            page2.css("left", "0");
-            page2.css("opacity", "1");
-            page2.css("z-index", page1_index - 1);
-            page2.css("visibility", "visible");
-            page2.show();
-        }
-    });
-    var page_width = parseInt(page1.css("width"));
-    page1.on("touchmove", function (e) {
-        if (page1.attr("touchable") == "false" || start_x == Infinity)
-            return;
-        var delta_x = e.originalEvent.targetTouches[0].pageX - start_x;
-        if (delta_x <= 0) {
-            if (page2 != null) {
-                page1.css("animation", "1");
-                page1.css("-webkit-animation", "1");
-                page1.css("left", "-" + (-delta_x) + "px");
-                page1.css("opacity", 1 + (delta_x / page_width));
-            }
-        } else {
-            if (page0 != null) {
-                page0.css("animation", "1");
-                page0.css("-webkit-animation", "1");
-                page0.css("left", -(1 - delta_x / page_width) * 100 + "%");
-                page0.css("opacity", delta_x / page_width);
-            }
-        }
-    });
-    page1.on("touchend", function (e) {
-        if (page1.attr("touchable") == "false" || start_x == Infinity)
-            return;
-        var delta_x = e.originalEvent.changedTouches[0].pageX - start_x;
-        if (delta_x < -80) {
-            if (page2 != null) {
-                if (page0 != null)
-                page0.css("visibility", "hidden");
-                page1.css("animation", "slidetoleft .4s forwards ease-out");
-                page1.css("-webkit-animation", "slidetoleft .4s forwards ease-out");
-                page1.attr("touchable", "false");
-                setTimeout(function () {
-                    page2.attr("touchable", "true");
-                }, 200);
-                if (page2.attr("alreadyDo") != "true") {
-                    page2.attr("alreadyDo", "true");
-                    setTimeout(function () {
-                        if (page2Do != null) {
-                            page2Do();
-                        }
-                    }, 400);
-                }
-            }
-        } else if (delta_x > 80) {
-            if (page0 != null) {
-                if (page2 != null)
-                    page2.css("visibility", "hidden");
-                page0.css("animation", "slidetoorigin1 .4s forwards ease-out");
-                page0.css("-webkit-animation", "slidetoorigin1 .4s forwards ease-out");
-                page1.attr("touchable", "false");
-                setTimeout(function () {
-                    page0.attr("touchable", "true");
-                }, 300);
-                if (page0.attr("alreadyDo") != "true") {
-                    page0.attr("alreadyDo", "true");
-                    setTimeout(function () {
-                        if (page0Do != null) {
-                            page0Do();
-                        }
-                    }, 400);
-                }
-            }
-        } else {
-            if (page2 != null) {
-                page1.css("animation", "slidetoorigin1 .1s forwards ease-out");
-                page1.css("-webkit-animation", "slidetoorigin1 .1s forwards ease-out");
-            }
-            if (page0 != null) {
-                page0.css("animation", "slidetoleft .1s forwards ease-out");
-                page0.css("-webkit-animation", "slidetoleft .1s forwards ease-out");
-            }
-        }
-    });
+    }
+});
+$(".thirdpage>.color_wrap>.color").click(function() {
+    $(".thirdpage>.bike").css("background-image", "url('/zt/2017/H5/aima_ludi/images/thirdpage_bike_"+($(this).index()+1)+".jpg')");
+});
+function showParam(num) {
+currentParam = (num+2)%3+1;
+// if (currentParam == 1) {
+//     $(".secondpage>.content>.prev").hide();
+//     $(".secondpage>.content>.next").show();
+// } else if (currentParam == 8) {
+//     $(".secondpage>.content>.prev").show();
+//     $(".secondpage>.content>.next").hide();
+// } else {
+//     $(".secondpage>.content>.prev").show();
+//     $(".secondpage>.content>.next").show();
+// }
+var $param = $(".secondpage>.content>.param.param_"+currentParam);
+$param.addClass("show");
+for(var i=1; i<currentParam; i++) {
+    $param = $(".secondpage>.content>.param.param_"+i);
+    $param.removeClass("show");
+    $param.addClass("onleft");
 }
+for(var i=currentParam+1; i<=8; i++) {
+    $param = $(".secondpage>.content>.param.param_"+i);
+    $param.removeClass("show onleft");
+  }
+}
+$(".param:not(.show_1)").css("display","none")
