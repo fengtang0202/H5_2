@@ -137,58 +137,26 @@ function registerSlide(page0Do, page0, page1, page2, page2Do) {
         }
     });
 }
-
-
 // secondPage left
 //获取页面startX和startY的值
-var touchstartX, touchstartY,currentParam;
+var touchstartX, touchstartY,currentParam=1;
 $(".content").on("touchstart", function(e) {
     touchstartX = e.originalEvent.targetTouches[0].pageX;
     touchstartY = e.originalEvent.targetTouches[0].pageY;
     console.log(1)
 });
-$(".content").on("touchend", function(e) {
+$(".param").on("touchend", function(e) {
     var deltaX = e.originalEvent.changedTouches[0].pageX - touchstartX;
     var deltaY = e.originalEvent.changedTouches[0].pageY - touchstartY;
-    if (Math.abs(deltaX) > 50 && Math.abs(deltaX) >  Math.abs(deltaY)) {
+      if (Math.abs(deltaX) > 50 && Math.abs(deltaX) >  Math.abs(deltaY)) {
         if (deltaX > 0) {
-            currentParam>1 && showParam(currentParam-1);
-            console.log("left:"+currentParam)
-            $(".param:not(.show_1)").css("display","none")
-              console.log("向右")
+             $(this).removeClass(".show_1").css("display","none")
+             $($(this).siblings()[0]).removeClass("onleft").css("display","none")
+             $($(this).siblings()[1]).addClass("show_1").css("display","block")
         }else{
-            currentParam<3 && showParam(currentParam+1);
-            $(".param:not(.show_1)").css("display","none")
-            console.log("left:"+currentParam)
-            console.log("向左")
+            $(this).removeClass(".show_1").css("display","none")
+            $($(this).siblings()[1]).removeClass("onleft").css("display","none")
+            $($(this).siblings()[0]).addClass("show_1").css("display","block")
         }
     }
 });
-$(".thirdpage>.color_wrap>.color").click(function() {
-    $(".thirdpage>.bike").css("background-image", "url('/zt/2017/H5/aima_ludi/images/thirdpage_bike_"+($(this).index()+1)+".jpg')");
-});
-function showParam(num) {
-currentParam = (num+2)%3+1;
-// if (currentParam == 1) {
-//     $(".secondpage>.content>.prev").hide();
-//     $(".secondpage>.content>.next").show();
-// } else if (currentParam == 8) {
-//     $(".secondpage>.content>.prev").show();
-//     $(".secondpage>.content>.next").hide();
-// } else {
-//     $(".secondpage>.content>.prev").show();
-//     $(".secondpage>.content>.next").show();
-// }
-var $param = $(".secondpage>.content>.param.param_"+currentParam);
-$param.addClass("show");
-for(var i=1; i<currentParam; i++) {
-    $param = $(".secondpage>.content>.param.param_"+i);
-    $param.removeClass("show");
-    $param.addClass("onleft");
-}
-for(var i=currentParam+1; i<=8; i++) {
-    $param = $(".secondpage>.content>.param.param_"+i);
-    $param.removeClass("show onleft");
-  }
-}
-$(".param:not(.show_1)").css("display","none")
