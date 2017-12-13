@@ -150,13 +150,17 @@ $(".param").on("touchend", function(e) {
     var deltaY = e.originalEvent.changedTouches[0].pageY - touchstartY;
       if (Math.abs(deltaX) > 50 && Math.abs(deltaX) >  Math.abs(deltaY)) {
         if (deltaX > 0) {
-             $(this).removeClass(".show_1").css("display","none")
-             $($(this).siblings()[0]).removeClass("onleft").css("display","none")
-             $($(this).siblings()[1]).addClass("show_1").css("display","block")
+             $(this).fadeOut()
+             $(this).siblings().fadeIn()
+             // $(this).removeClass(".show_1").css("display","none")
+             // $($(this).siblings()[0]).removeClass("onleft").css("display","none")
+             // $($(this).siblings()[1]).addClass("show_1").css("display","block")
         }else{
-             $(this).removeClass(".show_1").css("display","none")
-             $($(this).siblings()[1]).removeClass("onleft").css("display","none")
-             $($(this).siblings()[0]).addClass("show_1").css("display","block")
+             $(this).fadeOut()
+             $(this).siblings().fadeIn()
+             // $(this).removeClass(".show_1").css("display","none")
+             // $($(this).siblings()[1]).removeClass("onleft").css("display","none")
+             // $($(this).siblings()[0]).addClass("show_1").css("display","block")
         }
     }
 });
