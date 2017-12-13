@@ -62,8 +62,8 @@
         .dialog_wrap>.dialog.tag.show {-webkit-transform:translateZ(0) translateX(-50%) translateY(-50%) rotateY(0deg); transform:translateZ(0) translateX(-50%) translateY(-50%) rotateY(0deg); opacity:1;}
         .left_arrow{transition: all .5s linear;position: absolute;left:5%;font-size: 80px;top:50%;color:rgba(255,255,255,.8)}
         .right_arrow{transition: all .5s linear;position: absolute;right:5%;font-size: 80px;top:50%;color:rgba(255,255,255,.8)}
-         .in{position: absolute;top:1.5%;}
-         .in_1{top:2.5%}
+         /*.in{position: absolute;top:1.5%;}
+         .in_1{top:2.5%}*/
           .point { position:absolute; width:34px; height:34px; padding:20px; }
           .point_1{left:43%;top:13%;}
           .point_2{left:5%;top:15%;}
@@ -97,20 +97,20 @@
         .detail_1{top:28%;left:100%;}
         .detail_2{top:51%;left:-100%;}
         .detail_3{top:74%;left:100%;}
+        .bike_btn li{list-style: none;bottom:15%;position: absolute;width:30px;height:30px;background-color:#62615C;border-radius: 50%;}
+        .bike_btn li:last-child{left:42%;}
+        li.active{background-color: #fff;}
      </style>
 </head>
 <body>
-      <section class="page firstpage" touchable="true">
+      <section class="page firstpage" touchable="false">
           <div class="line_wrap">
               <span class="fillet_left fillet"></span>
               <img src="./images/react.png" alt="">
               <span class="fillet_right fillet"></span>
           </div>
-       <div class="bottom">
-           <div class="slide"><div class="arrow1"></div><div class="arrow2"></div></div>
-       </div>
       </section>
-      <section class="page secondpage"  touchable="false" >
+      <section class="page secondpage"  touchable="true" >
         <img class='in in_0' src="./images/IN_0.png" alt="">
         <img src="./images/bike.png" class='bike' alt="">
         <div class="bottom">
@@ -126,7 +126,7 @@
       </section>
       <section class="page forthpage" touchable="false" >
         <div class="content">
-         <div class='param  ' style="display:none">
+         <div class='param' style="display:none">
           <img src="./images/bike_2.png" alt="">
           <div class="point point_1"></div>
           <div class="point point_2"></div>
@@ -147,7 +147,7 @@
             </div>
           </div>
          </div>
-         <div class='param  '>
+         <div class='param'>
           <img src="./images/bike_3.png" alt="">
           <div class="point point_5"></div>
           <div class="point point_6"></div>
@@ -165,6 +165,10 @@
              <div class="dialog_under"></div>
           </div>
          </div>
+         <ul class='bike_btn'>
+            <li></li>
+            <li class="active"></li>
+         </ul>
          <div class="dialog_under"></div>
         </div>
         </div>

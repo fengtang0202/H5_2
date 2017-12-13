@@ -3,33 +3,39 @@ $(document).on("touchmove",function(e){
 }, false);
 // 点击圆点显示dialog
 // click =>touchstart
-$(".point").on("click",function(){
-  var index=$(this).attr("class").slice(-1)
-  $(".dialog_under").show()
-  $(`.tag${index}`).addClass("show")
+$(".line_wrap").on("click",function(){
+   $(".firstpage").css("top",0)
+   $(".firstpage").css("-webkit-animation", "slidetotop 1s forwards ease-out")
+   setTimeout(function(){
+     $(".in_0").attr("src","./images/IN_1.png")
+     $(".bike").attr("src","./images/bike_light.png")},300)
 })
-$(".dialog_under").on("click",function(){
-    $(".dialog").removeClass("show");
-    $(this).hide();
+ function timer(index){
+  return setInterval(function(){
+  index=(index+1)%2
+    $(".param").eq(index).fadeIn().siblings(".param").fadeOut()
+    $(".bike_btn").children().eq(index).addClass("active").siblings().removeClass("active")
+   },3000)
+ }
+registerSlide(null,null, $(".secondpage"), $(".thirdpage"),function(){setTimeout(function(){$(".in_1").attr("src","./images/IN_light.png")},300)});
+registerSlide(null, $(".secondpage"), $(".thirdpage") , $(".forthpage"),()=>{
+      let index=0
+      // timer(index)
+      $(".point").on("click",function(){
+        var index=$(this).attr("class").slice(-1)
+        $(".dialog_under").show()
+        $(`.tag${index}`).addClass("show")
+      })
+      $(".dialog_under").on("click",function(){
+          $(".dialog").removeClass("show");
+          $(this).hide();
+      });
 });
- $(".btn_img").click(function(){
-   let page=$(this).parent()
-   page.css("left",0)
-   page.css("-webkit-animation", "slidetoleft .4s forwards ease-out");
-     $(".photo").css({"animation":1,"left":0,"opacity":1,"visibility":"visible"})
-     $(".photo").attr("touchable",true)
- })
-registerSlide(null, null, $(".firstpage"), $(".secondpage"), function(){setTimeout(function(){
-  $(".in_0").attr("src","./images/IN_1.png")
-  $(".bike").attr("src","./images/bike_light.png")},500)
-});
-registerSlide(null, $(".firstpage"), $(".secondpage"), $(".thirdpage"),function(){setTimeout(function(){$(".in_1").attr("src","./images/IN_light.png")},500)});
-registerSlide(null, $(".secondpage"), $(".thirdpage"), $(".forthpage"),null);
-registerSlide(null, $(".thirdpage"), $(".forthpage"), $(".fivepgae"),function(){$(".page_5").css({"transition":"all 1s linear","left":"5%"})});
-registerSlide(null,$(".forthpage"),$(".fivepgae"),$(".sixpage"),function(){$(".page_6").css({"transition":"all 1s linear","left":"5%"})});
-registerSlide(null,$(".fivepgae"),$(".sixpage"),$(".sevenpage"),function(){setTimeout(function(){$(".bike_img").attr("src","./images/bike_5.jpg")},500)});
-registerSlide(null,$(".sixpage"),$(".sevenpage"),$(".eightpage"),null)
-registerSlide(null,$(".sevenpage"),$(".eightpage"),null,null)
+registerSlide(null, $(".thirdpage"), $(".forthpage"), $(".fivepgae"),function(){$(".page_5").css({"transition":"all .5s linear","left":"5%"})});
+registerSlide(null, $(".forthpage"),$(".fivepgae"), $(".sixpage"),function(){$(".page_6").css({"transition":"all .5s linear","left":"5%"})});
+registerSlide(null, $(".fivepgae"), $(".sixpage") , $(".sevenpage"),function(){setTimeout(function(){$(".bike_img").attr("src","./images/bike_5.jpg")},300)});
+registerSlide(null, $(".sixpage") , $(".sevenpage"), $(".eightpage") ,null)
+registerSlide(null, $(".sevenpage"), $(".eightpage"),null,null)
 function registerSlide(page0Do, page0, page1, page2, page2Do) {
     //上滑事件
     var start_y;
@@ -139,25 +145,28 @@ function registerSlide(page0Do, page0, page1, page2, page2Do) {
 }
 // secondPage left
 //获取页面startX和startY的值
-var touchstartX, touchstartY,currentParam=1;
+var touchstartX, touchstartY;
 $(".content").on("touchstart", function(e) {
     touchstartX = e.originalEvent.targetTouches[0].pageX;
     touchstartY = e.originalEvent.targetTouches[0].pageY;
-    console.log(1)
+    // $(".forthpage").attr("touchable","false")
 });
-$(".param").on("touchend", function(e) {
+
+  $(".param").on("touchend", function(e) {
     var deltaX = e.originalEvent.changedTouches[0].pageX - touchstartX;
     var deltaY = e.originalEvent.changedTouches[0].pageY - touchstartY;
       if (Math.abs(deltaX) > 50 && Math.abs(deltaX) >  Math.abs(deltaY)) {
         if (deltaX > 0) {
              $(this).fadeOut()
              $(this).siblings().fadeIn()
+             $(".dialog_under").css("display","none")
              // $(this).removeClass(".show_1").css("display","none")
              // $($(this).siblings()[0]).removeClass("onleft").css("display","none")
              // $($(this).siblings()[1]).addClass("show_1").css("display","block")
         }else{
              $(this).fadeOut()
              $(this).siblings().fadeIn()
+             $(".dialog_under").css("display","none")
              // $(this).removeClass(".show_1").css("display","none")
              // $($(this).siblings()[1]).removeClass("onleft").css("display","none")
              // $($(this).siblings()[0]).addClass("show_1").css("display","block")
