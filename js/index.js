@@ -15,9 +15,10 @@ $(".dialog_under").on("click",function(){
 $(".line_wrap").on("click",function(){
    $(".firstpage").css("top",0)
    $(".firstpage").css("-webkit-animation", "slidetotop 1s forwards ease-out")
+   $(".secondpage").attr("touchable","true")
    setTimeout(function(){
      $(".in_0").attr("src","./images/IN_1.png")
-     $(".bike").attr("src","./images/bike_light.png")},300)
+     $(".bike").attr("src","./images/bike_1.png")},300)
      //调用定时器的代码
      // let index=0
      // timer(index)
@@ -29,20 +30,15 @@ $(".line_wrap").on("click",function(){
     $(".bike_btn").children().eq(index).addClass("active").siblings().removeClass("active")
    },3000)
  }
-  registerSlide(null,null, $(".secondpage"),$(".thirdpage"),function(){
-    $(".in_0").attr("src","./images/IN_0.png")
-    setTimeout(function(){
-      $(".in_1").attr("src","./images/IN_light.png")},300)
-    });
-    registerSlide(
-      function(){
-        $(".in_0").attr("src","./images/IN_1.png")
-      }, $(".secondpage"), $(".thirdpage") , $(".forthpage"),()=>{});
+    let  timer1;
+    let [n,m]=[0,0];
+    registerSlide(null,null, $(".secondpage"),$(".thirdpage"),function(){$(".in_1").attr("src","./images/INblue_1.png")});
+    registerSlide(function(){$(".in_1").attr("src","./images/INblue_1.png")}, $(".secondpage"), $(".thirdpage") , $(".forthpage"),null);
     registerSlide(null, $(".thirdpage"), $(".forthpage"), $(".fivepgae"),function(){$(".page_5").css({"transition":"all .5s linear","left":"5%"})});
-    registerSlide(null, $(".forthpage"),$(".fivepgae"), $(".sixpage"),function(){$(".page_6").css({"transition":"all .5s linear","left":"5%"})});
-    registerSlide(null, $(".fivepgae"), $(".sixpage") , $(".sevenpage"),function(){setTimeout(function(){$(".bike_img").attr("src","./images/bike_5.jpg")},300)});
+    registerSlide(function(){$(".page_5").css({"transition":"all .5s linear","left":"5%"})}, $(".forthpage"),$(".fivepgae"), $(".sixpage"),function(){$(".page_6").css({"transition":"all .5s linear","left":"5%"})});
+    registerSlide(function(){$(".page_6").css({"transition":"all .5s linear","left":"5%"})}, $(".fivepgae"), $(".sixpage") , $(".sevenpage"),function(){setTimeout(function(){$(".bike_img").attr("src","./images/bike_5.jpg")},300)});
     registerSlide(null, $(".sixpage") , $(".sevenpage"), $(".eightpage") ,null)
-    registerSlide(null, $(".sevenpage"), $(".eightpage"),$(".secondpage"),null)
+    registerSlide(function(){setTimeout(function(){$(".bike_img").attr("src","./images/bike_5.jpg")},300)}, $(".sevenpage"), $(".eightpage"),null,null)
     function registerSlide(page0Do, page0, page1, page2, page2Do) {
         //上滑事件
         var start_y;
@@ -81,6 +77,7 @@ $(".line_wrap").on("click",function(){
         var page_height = parseInt(page1.css("height"));
         page1.on("touchmove",function(e) {
             if (page1.attr("touchable") == "false" || start_y == Infinity)
+
                 return;
             var delta_y = e.originalEvent.targetTouches[0].pageY - start_y;
             // console.log(e.originalEvent.targetTouches[0])
@@ -107,9 +104,16 @@ $(".line_wrap").on("click",function(){
             if (delta_y < -80) {
                 if (page2 != null) {
                     if (page0 != null)
-                        page0.css("visibility", "hidden");
+                    page0.css("visibility", "hidden");
                     page1.css("animation", "slidetotop .4s forwards ease-out");
                     page1.css("-webkit-animation", "slidetotop .4s forwards ease-out");
+                    console.log("向上")
+                    page1.find(".in_0").attr("src","./images/IN_0.png")
+                    page1.find(".in_1").attr("src","./images/INblue_0.png")
+                    page1.find(".bike_img").attr("src","./images/bike_4.jpg")
+                    page1.find(".detail_1").css({"transition":"1","left":"100%"})
+                    page1.find(".detail_2").css({"transition":"1","left":"-100%"})
+                    page1.find(".detail_3").css({"transition":"1","left":"100%"})
                     page1.attr("touchable", "false");
                     setTimeout(function(){page2.attr("touchable", "true");}, 200);
                     if (page2.attr("alreadyDo") != "true") {
@@ -124,9 +128,16 @@ $(".line_wrap").on("click",function(){
             } else if (delta_y > 80) {
                 if (page0 != null) {
                     if (page2 != null)
-                        page2.css("visibility", "hidden");
+                    page2.css("visibility", "hidden");
                     page0.css("animation", "slidetoorigin .4s forwards ease-out");
                     page0.css("-webkit-animation", "slidetoorigin .4s forwards ease-out");
+                    setTimeout(function(){
+                      page0.find(".in_0").attr("src","./images/IN_1.png")
+                      page0.find(".in_1").attr("src","./images/INblue_1.png")
+                      page0.find(".bike_img").attr("src","./images/bike_5.jpg")
+                      page0.find(".page_5").css({"transition":"all .5s linear","left":"5%"})
+                      page0.find(".page_6").css({"transition":"all .5s linear","left":"5%"})
+                    },1000)
                     page1.attr("touchable", "false");
                     setTimeout(function(){page0.attr("touchable", "true");}, 300);
                     if (page0.attr("alreadyDo") != "true") {
